@@ -23,7 +23,7 @@ sessionBus.invoke({
 	destination: 'org.mpris.MediaPlayer2.omxplayer',
 	path: '/org/mpris/MediaPlayer2',
 	'interface': 'org.freedesktop.DBus.Properties',
-	member: 'CanSetFullscreen'
+	member: 'Position'
 
 }, function(error, iface) {
 	if (error) {
