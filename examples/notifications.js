@@ -2,7 +2,7 @@ var dbus = require('../index.js');
 var bus = dbus.sessionBus();
 var notify = bus.getService('org.freedesktop.Notifications');
 notify.getInterface('/org/freedesktop/Notifications', 'org.freedesktop.Notifications', function(err, nm) {
-    console.log("Receive notatificatio", nm);
+    console.log("Receive notatification", nm);
     if (!nm) {
     	return;
     }
