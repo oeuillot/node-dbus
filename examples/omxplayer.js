@@ -11,11 +11,13 @@ if (!fs.existsSync(dbusAddressFilename)) {
 var busAddress = fs.readFileSync(dbusAddressFilename).toString();
 console.log("Bus address:", busAddress);
 
-var conn = dbus({
+var sessionBus = dbus.sessionBus({
 	busAddress: busAddress
 });
 
-conn.getInterface('org.mpris.MediaPlayer2.omxplayer', '/org/mpris/MediaPlayer2', 'interface', function(error, iface) {
+sessionBus.connection.on('message', console.log);
+
+sessionBus.getInterface('org.mpris.MediaPlayer2.omxplayer', '/org/mpris/MediaPlayer2', 'interface', function(error, iface) {
 	if (error) {
 		console.error("Get interface error:", error);
 		return;
