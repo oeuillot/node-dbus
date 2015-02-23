@@ -2,7 +2,7 @@ var fs = require('fs');
 
 var dbus = require('../index.js');
 
-var dbusAddressFilename = "/tmp/omxplayer." + process.env.USER;
+var dbusAddressFilename = "/tmp/omxplayerdbus." + process.env.USER;
 
 if (!fs.existsSync(dbusAddressFilename)) {
 	throw new Error("Can not get the dbus address  (try content of filename " + dbusAddressFilename + ")");
