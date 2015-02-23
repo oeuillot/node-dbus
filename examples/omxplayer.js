@@ -19,14 +19,16 @@ sessionBus.connection.on('message', function(msg) {
 	console.log("Receive", msg);
 });
 
-sessionBus.getInterface('org.mpris.MediaPlayer2.omxplayer', '/org/mpris/MediaPlayer2', 'org.mpris.MediaPlayer2.Player', function(error,
-		iface) {
+sessionBus.invoke({
+	destination: 'org.mpris.MediaPlayer2.omxplayer',
+	path: '/org/mpris/MediaPlayer2',
+	'interface': 'org.mpris.MediaPlayer2.Player',
+	member: 'CanSetFullscreen'
+
+}, function(error, iface) {
 	if (error) {
 		console.error("Get interface error:", error);
 		return;
 	}
-	iface.getProperties(function(error, props) {
-		console.log('Properties:');
-		console.log(props);
-	});
+	console.log("Return ", iface);
 });
