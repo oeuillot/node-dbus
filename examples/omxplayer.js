@@ -22,7 +22,7 @@ sessionBus.connection.on('message', function(msg) {
 sessionBus.invoke({
 	destination: 'org.mpris.MediaPlayer2.omxplayer',
 	path: '/org/mpris/MediaPlayer2',
-	'interface': 'org.mpris.MediaPlayer2.Player',
+	'interface': 'org.freedesktop.DBus.Properties',
 	member: 'CanSetFullscreen'
 
 }, function(error, iface) {
