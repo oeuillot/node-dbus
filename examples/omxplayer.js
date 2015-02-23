@@ -15,9 +15,12 @@ var sessionBus = dbus.sessionBus({
 	busAddress: busAddress
 });
 
-sessionBus.connection.on('message', console.log);
+sessionBus.connection.on('message', function(msg) {
+	console.log("Receive", msg);
+});
 
-sessionBus.getInterface('org.mpris.MediaPlayer2.omxplayer', '/org/mpris/MediaPlayer2', 'interface', function(error, iface) {
+sessionBus.getInterface('org.mpris.MediaPlayer2.omxplayer', '/org/mpris/MediaPlayer2', 'org.mpris.MediaPlayer2.Player', function(error,
+		iface) {
 	if (error) {
 		console.error("Get interface error:", error);
 		return;
