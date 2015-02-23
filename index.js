@@ -1,5 +1,7 @@
 // dbus.freedesktop.org/doc/dbus-specification.html
 
+var LOG=true;
+
 var EventEmitter = require('events').EventEmitter;
 var net = require('net');
 
@@ -31,6 +33,9 @@ function createStream(opts) {
     params[keyVal[0]] = keyVal[1];
   });
 
+  if (LOG) {
+  	console.log("Connect to ",family," params=",params);
+  }
   // TODO: multiple addressedd can be specified. In that case, try them in order and use first successful
   switch (family.toLowerCase()) {
     case 'tcp':
@@ -71,12 +76,18 @@ function createConnection(opts) {
   stream.setNoDelay();
 
   stream.on('error', function(err) {
+  	if (LOG) {
+  		console.error("Receive error",err);
+  	}
     // forward network and stream errors
     self.emit('error', err);
   });
 
   stream.on('end', function() {
-    self.emit('end');
+  	if (LOG) {
+  		console.error("Receive end");
+  	}
+   self.emit('end');
     self.message = function() {
       console.warn("Didn't write bytes to closed stream");
     };
@@ -90,7 +101,10 @@ function createConnection(opts) {
   var handshake = opts.server ? serverHandshake : clientHandshake;
   handshake(stream, opts, function(error, guid) {
     if (error) {
-      return self.emit('error');
+    	if (LOG) {
+    		console.error("Handshake error",error);
+    	}
+     return self.emit('error');
     }
     self.guid = guid;
     self.emit('connect');
