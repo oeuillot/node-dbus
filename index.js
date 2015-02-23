@@ -1,6 +1,6 @@
 // dbus.freedesktop.org/doc/dbus-specification.html
 
-var LOG=true;
+var LOG=false;
 
 var EventEmitter = require('events').EventEmitter;
 var net = require('net');

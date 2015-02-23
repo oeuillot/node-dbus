@@ -15,10 +15,6 @@ var sessionBus = dbus.sessionBus({
 	busAddress: busAddress
 });
 
-sessionBus.connection.on('message', function(msg) {
-	console.log("Receive", msg);
-});
-
 sessionBus.invoke({
 	destination: 'org.mpris.MediaPlayer2.omxplayer',
 	path: '/org/mpris/MediaPlayer2',
@@ -30,5 +26,5 @@ sessionBus.invoke({
 		console.error("Get interface error:", error);
 		return;
 	}
-	console.log("Return ", iface);
+	console.log("Return value ", iface);
 });
